@@ -15,7 +15,7 @@ public class Owner {
     private String lastName;
     @Column(unique = true)
     private String dni;
-    private Long phone;
+    private String phone;
 
     public Long getId() {
         return id;
@@ -49,11 +49,11 @@ public class Owner {
         this.dni = dni;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 }
