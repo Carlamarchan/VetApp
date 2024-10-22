@@ -1,5 +1,6 @@
-package com.vet.services.owner;
+package com.vet.mappers;
 
+import com.vet.api.v1.owner.dtos.CreateOwnerDto;
 import com.vet.api.v1.owner.dtos.GetOwnerDto;
 import com.vet.entities.Owner;
 
@@ -23,4 +24,20 @@ public class OwnerMapper {
                 entity.getPhone()
         );
     }
+
+    /**
+     * Maps a GetOwnerDto to an entity
+     *
+     * @param createOwnerDto A GetOwnerDto object
+     * @return A mapped entity
+     */
+    public static Owner mapCreateOwnerDtoToEntity(CreateOwnerDto createOwnerDto) {
+        return new Owner(
+                createOwnerDto.getLastName(),
+                createOwnerDto.getDni(),
+                createOwnerDto.getPhone(),
+                createOwnerDto.getName()
+        );
+    }
+
 }

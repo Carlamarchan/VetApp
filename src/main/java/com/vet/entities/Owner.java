@@ -1,6 +1,7 @@
 package com.vet.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 /**
  * Owner entity
@@ -8,14 +9,29 @@ import jakarta.persistence.*;
 @Entity
 @Table
 public class Owner {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String name;
+    @NotBlank
     private String lastName;
     @Column(unique = true)
+    @NotBlank
     private String dni;
+    @NotBlank
     private String phone;
+
+    public Owner() {
+    }
+
+    public Owner(String lastName, String dni, String phone, String name) {
+        this.lastName = lastName;
+        this.dni = dni;
+        this.phone = phone;
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
