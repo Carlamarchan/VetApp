@@ -1,10 +1,5 @@
 package com.vet.exception;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,6 +10,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Handler that manages the exceptions thrown in the application
@@ -63,4 +63,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body("Duplicated DNI error occurred. Please provide a unique DNI.");
     }
+
+    /**
+     * Handler method of OwnerNotFoundException exception
+     *
+     * @param ex The exception to handle
+     * @return Not found response with an error message
+     */
+    @ExceptionHandler(OwnerNotFoundException.class)
+    public ResponseEntity<String> handleOwnerNotFound(OwnerNotFoundException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body("That owner with the given ID does not exist");
+    }
+
 }
