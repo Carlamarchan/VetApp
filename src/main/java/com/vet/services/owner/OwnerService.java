@@ -100,4 +100,18 @@ public class OwnerService {
                 HttpStatus.CREATED
         );
     }
+
+    /**
+     * Deletes an Owner
+     *
+     * @param id Owner Id
+     */
+    public void deleteOwner(Long id) {
+        Optional<Owner> retrievedOwner = ownerRepository.findById(id);
+        if (retrievedOwner.isEmpty()) {
+            throw new OwnerNotFoundException();
+        }
+        Owner ownerToDelete = retrievedOwner.get();
+        ownerRepository.delete(ownerToDelete);
+    }
 }
