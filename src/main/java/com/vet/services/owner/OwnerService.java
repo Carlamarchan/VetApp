@@ -9,6 +9,8 @@ import com.vet.exception.OwnerNotFoundException;
 import com.vet.mappers.OwnerMapper;
 import com.vet.repository.owner.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -113,5 +115,16 @@ public class OwnerService {
         }
         Owner ownerToDelete = retrievedOwner.get();
         ownerRepository.delete(ownerToDelete);
+    }
+
+    /**
+     * Retrieves a page with owners
+     *
+     * @param page Page information
+     * @return An owners page
+     */
+    public Page<GetOwnerDto> getAllOwnersDto(Pageable page) {
+        Page<Owner> ownerPage = ownerRepository.findAll(page);
+        return ownerPage.map(OwnerMapper::mapEntityToGetOwnerDto);
     }
 }
