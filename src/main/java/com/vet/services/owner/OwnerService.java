@@ -99,7 +99,7 @@ public class OwnerService {
         GetOwnerDto updatedOwnerDto = OwnerMapper.mapEntityToGetOwnerDto(updatedOwner);
         return new ResponseEntity<>(
                 updatedOwnerDto,
-                HttpStatus.CREATED
+                HttpStatus.OK
         );
     }
 

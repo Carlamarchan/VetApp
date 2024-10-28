@@ -1,5 +1,6 @@
 package com.vet.api.v1.owner.dtos;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 
 /**
@@ -8,12 +9,16 @@ import jakarta.validation.constraints.NotBlank;
 public class CreateOwnerDto {
 
     @NotBlank(message = "Owner name is required.")
+    @Schema(example = "Carla")
     private final String name;
     @NotBlank(message = "Owner last name is required.")
+    @Schema(example = "Marchán")
     private final String lastName;
     @NotBlank(message = "Owner DNI is required.")
+    @Schema(example = "604333B")
     private final String dni;
     @NotBlank(message = "Owner phone is required.")
+    @Schema(example = "123456789")
     private final String phone;
 
     public CreateOwnerDto(String name, String lastName, String dni, String phone) {
