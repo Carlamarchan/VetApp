@@ -90,4 +90,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .body("The pet with the given ID does not exist");
     }
 
+    /**
+     * Handler method of DuplicatedChipNumberException exception
+     *
+     * @param ex The exception to handle
+     * @return Bad request response with an error message
+     */
+    @ExceptionHandler(DuplicatedChipNumberException.class)
+    public ResponseEntity<String> handleDuplicatedKeyException(DuplicatedChipNumberException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body("Duplicated Chip Number error occurred. Please provide a unique Chip Number.");
+    }
+
 }

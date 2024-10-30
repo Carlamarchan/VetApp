@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * DTO that represents a pet response
  */
 public class GetPetDto {
+    @Schema (example = "1" )
     private final Long id;
     @Schema (example = "Luna" )
     private final String name;

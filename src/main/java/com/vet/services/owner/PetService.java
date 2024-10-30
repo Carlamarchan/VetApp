@@ -1,9 +1,14 @@
 package com.vet.services.owner;
 
+import com.vet.api.v1.pet.dtos.CreatePetDto;
 import com.vet.api.v1.pet.dtos.GetPetDto;
+import com.vet.entities.Owner;
 import com.vet.entities.Pet;
+import com.vet.exception.DuplicatedChipNumberException;
+import com.vet.exception.OwnerNotFoundException;
 import com.vet.exception.PetNotFoundException;
 import com.vet.mappers.PetMapper;
+import com.vet.repository.owner.OwnerRepository;
 import com.vet.repository.pet.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +24,12 @@ import java.util.Optional;
 public class PetService {
 
     private final PetRepository petRepository;
+    private final OwnerRepository ownerRepository;
 
     @Autowired
-    public PetService(PetRepository petRepository) {
+    public PetService(PetRepository petRepository, OwnerRepository ownerRepository) {
         this.petRepository = petRepository;
+        this.ownerRepository = ownerRepository;
     }
 
     /**
@@ -39,6 +46,33 @@ public class PetService {
         return new ResponseEntity<>(
                 PetMapper.mapEntityToGetPetDto(optionalPet.get()),
                 HttpStatus.OK
+        );
+    }
+
+    /**
+     * Creates a Pet
+     *
+     * @param petDto DTO that contains the information needed to create a pet
+     * @return A response with the information of the created pet
+     */
+    public ResponseEntity<GetPetDto> createPet(CreatePetDto petDto) {
+        Optional<Owner> retrievedOwner = ownerRepository.findById(petDto.getOwner().getId());
+        if (retrievedOwner.isEmpty()) {
+            throw new OwnerNotFoundException();
+        }
+
+        Optional<Pet> retrievedPet = petRepository.findByChipNumber(petDto.getChipNumber());
+        if (retrievedPet.isPresent()) {
+            throw new DuplicatedChipNumberException();
+        }
+
+        Owner foundOwner = retrievedOwner.get();
+        Pet petToSave = PetMapper.mapCreatePetDtoToEntity(petDto, foundOwner);
+        Pet savedPet = petRepository.save(petToSave);
+        GetPetDto savedPetDto = PetMapper.mapEntityToGetPetDto(savedPet);
+        return new ResponseEntity<>(
+                savedPetDto,
+                HttpStatus.CREATED
         );
     }
 }

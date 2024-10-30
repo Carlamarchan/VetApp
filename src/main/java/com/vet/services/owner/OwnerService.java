@@ -19,7 +19,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Service related of owner's operations
+ * Service related with owner's operations
  */
 @Service
 public class OwnerService {
