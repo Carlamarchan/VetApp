@@ -58,7 +58,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * @return Bad request response with an error message
      */
     @ExceptionHandler(DuplicatedDniException.class)
-    public ResponseEntity<String> handleDuplicateKeyException(DuplicatedDniException ex) {
+    public ResponseEntity<String> handleDuplicatedKeyException(DuplicatedDniException ex) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body("Duplicated DNI error occurred. Please provide a unique DNI.");
@@ -74,7 +74,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<String> handleOwnerNotFound(OwnerNotFoundException ex) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body("That owner with the given ID does not exist");
+                .body("The owner with the given ID does not exist");
+    }
+
+    /**
+     * Handler method of PetNotFoundException exception
+     *
+     * @param ex The exception to handle
+     * @return Not found response with an error message
+     */
+    @ExceptionHandler(PetNotFoundException.class)
+    public ResponseEntity<String> handlePetNotFound(PetNotFoundException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body("The pet with the given ID does not exist");
     }
 
 }

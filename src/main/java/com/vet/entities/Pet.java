@@ -14,6 +14,9 @@ public class Pet {
     private Long id;
     @NotBlank
     private String name;
+    @Column(unique = true)
+    @NotBlank
+    private String chipNumber;
     @NotNull
     @Enumerated(EnumType.STRING)
     private PetType type;
@@ -24,9 +27,9 @@ public class Pet {
     public Pet() {
     }
 
-    public Pet(Long id, String name, PetType type, Owner owner) {
-        this.id = id;
+    public Pet(String name, String chipNumber, PetType type, Owner owner) {
         this.name = name;
+        this.chipNumber = chipNumber;
         this.type = type;
         this.owner = owner;
     }
@@ -45,6 +48,14 @@ public class Pet {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getChipNumber() {
+        return chipNumber;
+    }
+
+    public void setChipNumber(String chipNumber) {
+        this.chipNumber = chipNumber;
     }
 
     public PetType getType() {
