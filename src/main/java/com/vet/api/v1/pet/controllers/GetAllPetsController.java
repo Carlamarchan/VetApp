@@ -1,7 +1,7 @@
-package com.vet.api.v1.owner.controllers;
+package com.vet.api.v1.pet.controllers;
 
-import com.vet.api.v1.owner.dtos.GetOwnerDto;
-import com.vet.services.owner.OwnerService;
+import com.vet.api.v1.pet.dtos.GetPetDto;
+import com.vet.services.owner.PetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -12,41 +12,41 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.vet.api.constants.SwaggerConstants.OWNER_TAG;
+import static com.vet.api.constants.SwaggerConstants.PET_TAG;
 
 /**
- * Controller that retrieves all owners
+ * Controller that retrieves all pets
  */
 @RestController
-public class GetAllOwnersController {
-    private final OwnerService ownerService;
+public class GetAllPetsController {
+    private final PetService petService;
 
     @Autowired
-    public GetAllOwnersController(OwnerService ownerService) {
-        this.ownerService = ownerService;
+    public GetAllPetsController(PetService petService) {
+        this.petService = petService;
     }
 
     /**
-     * Retrieves a page with owners
+     * Retrieves a page with pets
      *
      * @param page Page information
-     * @return An owners page
+     * @return A pets page
      */
     @Operation(
-            summary = "Gets all owners",
-            tags = OWNER_TAG
+            summary = "Gets all pets",
+            tags = PET_TAG
     )
     @ApiResponses(
             value = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "List of paginated owners",
+                            description = "List of paginated pets",
                             useReturnTypeSchema = true
                     )
             }
     )
-    @GetMapping(path = "api/v1/owners")
-    public Page<GetOwnerDto> getAllOwners(@PageableDefault(size = 5) Pageable page) {
-        return this.ownerService.getAllOwners(page);
+    @GetMapping(path = "api/v1/pets")
+    public Page<GetPetDto> getAllPets(@PageableDefault(size = 5) Pageable page) {
+        return this.petService.getAllPets(page);
     }
 }

@@ -12,6 +12,8 @@ import com.vet.mappers.PetMapper;
 import com.vet.repository.owner.OwnerRepository;
 import com.vet.repository.pet.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -119,5 +121,16 @@ public class PetService {
         }
         Pet petToDelete = retrievedPet.get();
         petRepository.delete(petToDelete);
+    }
+
+    /**
+     * Retrieves a page with pets
+     *
+     * @param page Page information
+     * @return A pets page
+     */
+    public Page<GetPetDto> getAllPets(Pageable page) {
+        Page<Pet> petPage = petRepository.findAll(page);
+        return petPage.map(PetMapper::mapEntityToGetPetDto);
     }
 }

@@ -123,7 +123,7 @@ public class OwnerService {
      * @param page Page information
      * @return An owners page
      */
-    public Page<GetOwnerDto> getAllOwnersDto(Pageable page) {
+    public Page<GetOwnerDto> getAllOwners(Pageable page) {
         Page<Owner> ownerPage = ownerRepository.findAll(page);
         return ownerPage.map(OwnerMapper::mapEntityToGetOwnerDto);
     }
