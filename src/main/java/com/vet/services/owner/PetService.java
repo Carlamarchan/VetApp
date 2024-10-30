@@ -106,4 +106,18 @@ public class PetService {
                 HttpStatus.OK
         );
     }
+
+    /**
+     * Deletes a pet
+     *
+     * @param id Pet Id
+     */
+    public void deletePet(Long id) {
+        Optional<Pet> retrievedPet = petRepository.findById(id);
+        if (retrievedPet.isEmpty()) {
+            throw new PetNotFoundException();
+        }
+        Pet petToDelete = retrievedPet.get();
+        petRepository.delete(petToDelete);
+    }
 }

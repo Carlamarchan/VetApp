@@ -1,6 +1,6 @@
-package com.vet.api.v1.owner.controllers;
+package com.vet.api.v1.pet.controllers;
 
-import com.vet.services.owner.OwnerService;
+import com.vet.services.owner.PetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -9,34 +9,34 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.vet.api.constants.SwaggerConstants.OWNER_TAG;
+import static com.vet.api.constants.SwaggerConstants.PET_TAG;
 
 /**
- * Controller that deletes an owner
+ * Controller that deletes a pet
  */
 @RestController
-public class DeleteOwnerController {
-    private final OwnerService ownerService;
+public class DeletePetController {
+    private final PetService petService;
 
     @Autowired
-    public DeleteOwnerController(OwnerService ownerService) {
-        this.ownerService = ownerService;
+    public DeletePetController(PetService petService) {
+        this.petService = petService;
     }
 
     /**
-     * Deletes an owner
+     * Deletes a pet
      *
-     * @param id Owner ID
+     * @param id Pet ID
      */
     @Operation(
-            summary = "Deletes an owner",
-            tags = OWNER_TAG
+            summary = "Deletes a pet",
+            tags = PET_TAG
     )
     @ApiResponses(
             value = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "Owner deleted successfully"
+                            description = "Pet deleted successfully"
                     ),
                     @ApiResponse(
                             responseCode = "404",
@@ -44,8 +44,8 @@ public class DeleteOwnerController {
                     )
             }
     )
-    @DeleteMapping(path = "api/v1/owners/{id}")
-    public void deleteOwner(@PathVariable Long id) {
-        this.ownerService.deleteOwner(id);
+    @DeleteMapping(path = "api/v1/pets/{id}")
+    public void deletePet(@PathVariable Long id) {
+        this.petService.deletePet(id);
     }
 }

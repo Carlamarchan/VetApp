@@ -106,7 +106,7 @@ public class OwnerService {
     /**
      * Deletes an Owner
      *
-     * @param id Owner Id
+     * @param id Owner ID
      */
     public void deleteOwner(Long id) {
         Optional<Owner> retrievedOwner = ownerRepository.findById(id);
