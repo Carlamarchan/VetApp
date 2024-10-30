@@ -11,5 +11,11 @@ import java.util.Optional;
  */
 @Repository
 public interface PetRepository extends JpaRepository<Pet, Long> {
+    /**
+     * Retrieves an optional pet by a given chip number
+     *
+     * @param chipNumber Chip number to search for the pet
+     * @return An optional pet if exists by the provided chip number
+     */
     Optional<Pet> findByChipNumber(String chipNumber);
 }

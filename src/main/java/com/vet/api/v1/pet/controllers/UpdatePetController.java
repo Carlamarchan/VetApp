@@ -1,8 +1,8 @@
-package com.vet.api.v1.owner.controllers;
+package com.vet.api.v1.pet.controllers;
 
-import com.vet.api.v1.owner.dtos.GetOwnerDto;
-import com.vet.api.v1.owner.dtos.UpdateOwnerDto;
-import com.vet.services.owner.OwnerService;
+import com.vet.api.v1.pet.dtos.GetPetDto;
+import com.vet.api.v1.pet.dtos.UpdatePetDto;
+import com.vet.services.owner.PetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -15,37 +15,36 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.vet.api.constants.SwaggerConstants.OWNER_TAG;
+import static com.vet.api.constants.SwaggerConstants.PET_TAG;
 
 /**
- * Controller that updates an owner
+ * Controller that updates a pet
  */
 @RestController
-public class UpdateOwnerController {
-    private final OwnerService ownerService;
+public class UpdatePetController {
+    private final PetService petService;
 
     @Autowired
-    public UpdateOwnerController(OwnerService ownerService) {
-        this.ownerService = ownerService;
+    public UpdatePetController(PetService petService) {
+        this.petService = petService;
     }
 
     /**
-     * Updates an Owner
+     * Updates a pet
      *
-     * @param id       Owner ID
-     * @param ownerDto DTO that contains the information needed to update an owner
-     * @return A response with the information of the updated owner
+     * @param id     Pet ID
+     * @param petDto DTO that contains the information needed to update a pet
+     * @return A response with the information of the updated pet
      */
-
     @Operation(
-            summary = "Updates an owner by ID",
-            tags = OWNER_TAG
+            summary = "Updates a pet by ID",
+            tags = PET_TAG
     )
     @ApiResponses(
             value = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "Updated owner",
+                            description = "Updated pet",
                             useReturnTypeSchema = true
                     ),
                     @ApiResponse(
@@ -60,8 +59,8 @@ public class UpdateOwnerController {
                     )
             }
     )
-    @PutMapping(path = "api/v1/owners/{id}")
-    public ResponseEntity<GetOwnerDto> updateOwner(@PathVariable Long id, @RequestBody @Valid UpdateOwnerDto ownerDto) {
-        return this.ownerService.updateOwner(id, ownerDto);
+    @PutMapping(path = "api/v1/pets/{id}")
+    public ResponseEntity<GetPetDto> updatePet(@PathVariable Long id, @RequestBody @Valid UpdatePetDto petDto) {
+        return this.petService.updatePet(id, petDto);
     }
 }

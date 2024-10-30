@@ -2,6 +2,7 @@ package com.vet.services.owner;
 
 import com.vet.api.v1.pet.dtos.CreatePetDto;
 import com.vet.api.v1.pet.dtos.GetPetDto;
+import com.vet.api.v1.pet.dtos.UpdatePetDto;
 import com.vet.entities.Owner;
 import com.vet.entities.Pet;
 import com.vet.exception.DuplicatedChipNumberException;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -73,6 +75,35 @@ public class PetService {
         return new ResponseEntity<>(
                 savedPetDto,
                 HttpStatus.CREATED
+        );
+    }
+
+    /**
+     * Updates a pet
+     *
+     * @param id     Pet Id
+     * @param petDto DTO that contains the information needed to update a pet
+     * @return A response with the information of the updated pet
+     */
+    public ResponseEntity<GetPetDto> updatePet(Long id, UpdatePetDto petDto) {
+        Optional<Pet> retrievedPetById = petRepository.findById(id);
+        if (retrievedPetById.isEmpty()) {
+            throw new PetNotFoundException();
+        }
+        Optional<Pet> retrievePetByChipNumber = petRepository.findByChipNumber(petDto.getChipNumber());
+        if (retrievePetByChipNumber.isPresent() && !Objects.equals(id, retrievePetByChipNumber.get().getId())) {
+            throw new DuplicatedChipNumberException();
+        }
+        Pet petToUpdate = retrievedPetById.get();
+        petToUpdate.setName(petDto.getName());
+        petToUpdate.setType(petDto.getType());
+        petToUpdate.setChipNumber(petDto.getChipNumber());
+
+        Pet updatedPet = petRepository.save(petToUpdate);
+        GetPetDto updatedPetDto = PetMapper.mapEntityToGetPetDto(updatedPet);
+        return new ResponseEntity<>(
+                updatedPetDto,
+                HttpStatus.OK
         );
     }
 }
