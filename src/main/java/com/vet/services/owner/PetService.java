@@ -133,4 +133,30 @@ public class PetService {
         Page<Pet> petPage = petRepository.findAll(page);
         return petPage.map(PetMapper::mapEntityToGetPetDto);
     }
+
+    /**
+     * Updates a pet owner
+     *
+     * @param id      Pet ID
+     * @param ownerId Owner ID
+     * @return A response with the information of the updated owner pet
+     */
+    public ResponseEntity<GetPetDto> updateOwnerPet(Long id, Long ownerId) {
+        Optional<Pet> retrievedPetById = petRepository.findById(id);
+        if (retrievedPetById.isEmpty()) {
+            throw new PetNotFoundException();
+        }
+        Optional<Owner> optionalOwner = ownerRepository.findById(ownerId);
+        if (optionalOwner.isEmpty()) {
+            throw new OwnerNotFoundException();
+        }
+        Pet petToUpdate = retrievedPetById.get();
+        petToUpdate.setOwner(optionalOwner.get());
+        Pet updatedPet = petRepository.save(petToUpdate);
+        GetPetDto updatedPetDto = PetMapper.mapEntityToGetPetDto(updatedPet);
+        return new ResponseEntity<>(
+                updatedPetDto,
+                HttpStatus.OK
+        );
+    }
 }
