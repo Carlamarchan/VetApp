@@ -1,9 +1,10 @@
 package com.vet.api.v1.pet.controllers;
 
 import com.vet.api.v1.pet.dtos.GetPetDto;
-import com.vet.services.owner.PetService;
+import com.vet.services.pet.PetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +58,8 @@ public class ChangePetOwnerController {
                     )
             }
     )
-    @PutMapping(path = "api/v1/pets/{petId}/change_owner")
-    public ResponseEntity<GetPetDto> updateOwnerPet(@PathVariable Long petId, @RequestParam Long ownerId) {
-        return this.petService.updateOwnerPet(petId, ownerId);
+    @PutMapping(path = "api/v1/pets/{id}/change_owner")
+    public ResponseEntity<GetPetDto> updateOwnerPet(@PathVariable Long id, @RequestParam Long ownerId) {
+        return this.petService.updateOwnerPet(id, ownerId);
     }
 }
