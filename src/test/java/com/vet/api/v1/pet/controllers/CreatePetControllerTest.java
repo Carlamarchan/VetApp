@@ -5,7 +5,7 @@ import com.vet.api.v1.owner.dtos.OwnerIdDto;
 import com.vet.api.v1.pet.dtos.CreatePetDto;
 import com.vet.api.v1.pet.dtos.GetPetDto;
 import com.vet.enums.PetType;
-import com.vet.services.owner.PetService;
+import com.vet.services.pet.PetService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
