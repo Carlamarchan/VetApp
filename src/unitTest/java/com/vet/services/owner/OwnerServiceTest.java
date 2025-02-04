@@ -1,6 +1,6 @@
 package com.vet.services.owner;
 
-import com.vet.api.v1.owner.dtos.CreateOwnerDto;
+import com.vet.api.v1.owner.dtos.CreatePetDto;
 import com.vet.api.v1.owner.dtos.GetOwnerDto;
 import com.vet.api.v1.owner.dtos.UpdateOwnerDto;
 import com.vet.entities.Owner;
@@ -79,7 +79,7 @@ public class OwnerServiceTest {
 
     @Test
     public void testCreateOwnerExceptions() {
-        CreateOwnerDto existentRequestOwner = new CreateOwnerDto(
+        CreatePetDto existentRequestOwner = new CreatePetDto(
                 "Carla",
                 "Marchán",
                 "1111A",
@@ -104,7 +104,7 @@ public class OwnerServiceTest {
 
     @Test
     public void testCreateOwnerOk() {
-        CreateOwnerDto requestOwner = new CreateOwnerDto(
+        CreatePetDto requestOwner = new CreatePetDto(
                 "Juan",
                 "Perez",
                 "2222B",

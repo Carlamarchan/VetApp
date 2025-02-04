@@ -1,6 +1,6 @@
 package com.vet.api.v1.owner.controllers;
 
-import com.vet.api.v1.owner.dtos.CreateOwnerDto;
+import com.vet.api.v1.owner.dtos.CreatePetDto;
 import com.vet.api.v1.owner.dtos.GetOwnerDto;
 import com.vet.services.owner.OwnerService;
 import org.junit.jupiter.api.Test;
@@ -38,7 +38,7 @@ public class CreateOwnerControllerTest {
                 HttpStatus.CREATED
         );
 
-        CreateOwnerDto ownerRequest = new CreateOwnerDto(
+        CreatePetDto ownerRequest = new CreatePetDto(
                 "Carla",
                 "Marchán",
                 "1111A",

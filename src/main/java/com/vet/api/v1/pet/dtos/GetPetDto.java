@@ -18,14 +18,14 @@ public class GetPetDto {
     private final PetType type;
     @Schema(example = "1111A")
     private final String chipNumber;
-    private final GetOwnerDto ownerDto;
+    private final GetOwnerDto owner;
 
     public GetPetDto(Long id, String name, String chipNumber, PetType type, GetOwnerDto ownerDto) {
         this.id = id;
         this.name = name;
         this.chipNumber = chipNumber;
         this.type = type;
-        this.ownerDto = ownerDto;
+        this.owner = ownerDto;
     }
 
     public Long getId() {
@@ -44,8 +44,8 @@ public class GetPetDto {
         return chipNumber;
     }
 
-    public GetOwnerDto getOwnerDto() {
-        return ownerDto;
+    public GetOwnerDto getOwner() {
+        return owner;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class GetPetDto {
                 && Objects.equals(name, getPetDto.name)
                 && type == getPetDto.type
                 && Objects.equals(chipNumber, getPetDto.chipNumber)
-                && Objects.equals(ownerDto, getPetDto.ownerDto);
+                && Objects.equals(owner, getPetDto.owner);
     }
 }
 

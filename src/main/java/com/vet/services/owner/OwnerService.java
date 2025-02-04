@@ -1,6 +1,6 @@
 package com.vet.services.owner;
 
-import com.vet.api.v1.owner.dtos.CreateOwnerDto;
+import com.vet.api.v1.owner.dtos.CreatePetDto;
 import com.vet.api.v1.owner.dtos.GetOwnerDto;
 import com.vet.api.v1.owner.dtos.UpdateOwnerDto;
 import com.vet.entities.Owner;
@@ -55,7 +55,7 @@ public class OwnerService {
      * @param ownerDto DTO that contains the information needed to create an owner
      * @return A response with the information of the created owner
      */
-    public ResponseEntity<GetOwnerDto> createOwner(CreateOwnerDto ownerDto) {
+    public ResponseEntity<GetOwnerDto> createOwner(CreatePetDto ownerDto) {
         Optional<Owner> retrievedOwner = ownerRepository.findByDni(ownerDto.getDni());
         if (retrievedOwner.isPresent()) {
             throw new DuplicatedDniException();

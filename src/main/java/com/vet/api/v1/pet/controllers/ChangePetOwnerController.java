@@ -31,7 +31,7 @@ public class ChangePetOwnerController {
     /**
      * Updates a pet owner
      *
-     * @param petId   Pet ID
+     * @param id      Pet ID
      * @param ownerId Owner ID
      * @return A response with the information of the updated pet owner
      */

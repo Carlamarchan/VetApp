@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 /**
  * DTO that contains the information needed to create an owner
  */
-public class CreateOwnerDto {
+public class CreatePetDto {
 
     @NotBlank(message = "Owner name is required.")
     @Schema(example = "Carla")
@@ -21,7 +21,7 @@ public class CreateOwnerDto {
     @Schema(example = "123456789")
     private final String phone;
 
-    public CreateOwnerDto(String name, String lastName, String dni, String phone) {
+    public CreatePetDto(String name, String lastName, String dni, String phone) {
         this.name = name;
         this.lastName = lastName;
         this.dni = dni;

@@ -1,0 +1,1 @@
+select * from owner; --To avoid IllegalArgumentException: 'script' must not be null or empty

@@ -1,6 +1,6 @@
 package com.vet.mappers;
 
-import com.vet.api.v1.owner.dtos.CreateOwnerDto;
+import com.vet.api.v1.owner.dtos.CreatePetDto;
 import com.vet.api.v1.owner.dtos.GetOwnerDto;
 import com.vet.entities.Owner;
 
@@ -31,7 +31,7 @@ public class OwnerMapper {
      * @param createOwnerDto A GetOwnerDto object
      * @return A mapped entity
      */
-    public static Owner mapCreateOwnerDtoToEntity(CreateOwnerDto createOwnerDto) {
+    public static Owner mapCreateOwnerDtoToEntity(CreatePetDto createOwnerDto) {
         return new Owner(
                 createOwnerDto.getLastName(),
                 createOwnerDto.getDni(),

@@ -3,6 +3,8 @@ package com.vet.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.Objects;
+
 /**
  * Owner entity
  */
@@ -71,5 +73,16 @@ public class Owner {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Owner owner = (Owner) o;
+        return Objects.equals(id, owner.id)
+                && Objects.equals(name, owner.name)
+                && Objects.equals(lastName, owner.lastName)
+                && Objects.equals(dni, owner.dni)
+                && Objects.equals(phone, owner.phone);
     }
 }

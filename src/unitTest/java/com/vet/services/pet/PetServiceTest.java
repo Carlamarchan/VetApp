@@ -189,7 +189,7 @@ public class PetServiceTest {
         assertEquals(savedPet.getChipNumber(), response.getBody().getChipNumber());
         assertEquals(savedPet.getName(), response.getBody().getName());
         assertEquals(savedPet.getType(), response.getBody().getType());
-        assertEquals(savedPet.getOwner().getDni(), response.getBody().getOwnerDto().getDni());
+        assertEquals(savedPet.getOwner().getDni(), response.getBody().getOwner().getDni());
     }
 
     @Test
