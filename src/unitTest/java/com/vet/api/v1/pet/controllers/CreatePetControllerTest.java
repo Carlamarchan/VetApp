@@ -42,8 +42,8 @@ public class CreatePetControllerTest {
                 "1111A",
                 PetType.DOG,
                 expectedOwner
-
         );
+        
         ResponseEntity<GetPetDto> expectedResponse = new ResponseEntity<>(
                 expectedPet,
                 HttpStatus.CREATED
