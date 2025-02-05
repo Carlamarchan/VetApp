@@ -4,27 +4,28 @@ import com.vet.api.v1.owner.dtos.GetOwnerDto;
 import com.vet.enums.PetType;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.Objects;
+
 /**
  * DTO that represents a pet response
  */
 public class GetPetDto {
-    @Schema (example = "1" )
+    @Schema(example = "1")
     private final Long id;
-    @Schema (example = "Luna" )
+    @Schema(example = "Luna")
     private final String name;
-    @Schema (example = "DOG")
+    @Schema(example = "DOG")
     private final PetType type;
-    @Schema (example = "1111A")
-    private final String  chipNumber;
-    private final GetOwnerDto ownerDto ;
-
+    @Schema(example = "1111A")
+    private final String chipNumber;
+    private final GetOwnerDto owner;
 
     public GetPetDto(Long id, String name, String chipNumber, PetType type, GetOwnerDto ownerDto) {
         this.id = id;
         this.name = name;
         this.chipNumber = chipNumber;
         this.type = type;
-        this.ownerDto= ownerDto;
+        this.owner = ownerDto;
     }
 
     public Long getId() {
@@ -43,8 +44,20 @@ public class GetPetDto {
         return chipNumber;
     }
 
-    public GetOwnerDto getOwnerDto() {
-        return ownerDto;
+    public GetOwnerDto getOwner() {
+        return owner;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        GetPetDto getPetDto = (GetPetDto) o;
+        return Objects.equals(id, getPetDto.id)
+                && Objects.equals(name, getPetDto.name)
+                && type == getPetDto.type
+                && Objects.equals(chipNumber, getPetDto.chipNumber)
+                && Objects.equals(owner, getPetDto.owner);
     }
 }
+
 

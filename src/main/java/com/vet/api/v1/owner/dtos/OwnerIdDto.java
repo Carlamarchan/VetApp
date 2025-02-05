@@ -1,5 +1,6 @@
 package com.vet.api.v1.owner.dtos;
 
+import com.vet.enums.PetType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 
@@ -21,4 +22,8 @@ public class OwnerIdDto {
     public Long getId() {
         return id;
     }
+
 }
+
+
+

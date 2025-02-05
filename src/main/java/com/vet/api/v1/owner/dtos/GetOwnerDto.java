@@ -2,6 +2,8 @@ package com.vet.api.v1.owner.dtos;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.Objects;
+
 /**
  * DTO that represents an owner response
  */
@@ -44,5 +46,17 @@ public class GetOwnerDto {
 
     public String getPhone() {
         return phone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GetOwnerDto that = (GetOwnerDto) o;
+        return Objects.equals(id, that.id)
+                && Objects.equals(name, that.name)
+                && Objects.equals(lastName, that.lastName)
+                && Objects.equals(dni, that.dni)
+                && Objects.equals(phone, that.phone);
     }
 }

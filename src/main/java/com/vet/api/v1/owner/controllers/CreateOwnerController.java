@@ -1,6 +1,6 @@
 package com.vet.api.v1.owner.controllers;
 
-import com.vet.api.v1.owner.dtos.CreateOwnerDto;
+import com.vet.api.v1.owner.dtos.CreatePetDto;
 import com.vet.api.v1.owner.dtos.GetOwnerDto;
 import com.vet.services.owner.OwnerService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -54,7 +54,7 @@ public class CreateOwnerController {
             }
     )
     @PostMapping(path = "api/v1/owners")
-    public ResponseEntity<GetOwnerDto> createOwner(@RequestBody @Valid CreateOwnerDto ownerDto) {
+    public ResponseEntity<GetOwnerDto> createOwner(@RequestBody @Valid CreatePetDto ownerDto) {
         return this.ownerService.createOwner(ownerDto);
     }
 }

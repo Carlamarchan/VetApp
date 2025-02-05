@@ -1,4 +1,4 @@
-package com.vet.services.owner;
+package com.vet.services.pet;
 
 import com.vet.api.v1.pet.dtos.CreatePetDto;
 import com.vet.api.v1.pet.dtos.GetPetDto;

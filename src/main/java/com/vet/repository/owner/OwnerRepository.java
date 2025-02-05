@@ -19,4 +19,6 @@ public interface OwnerRepository extends JpaRepository<Owner, Long> {
      * @return An optional owner if exists by the provided DNI
      */
     Optional<Owner> findByDni(String dni);
+
+
 }

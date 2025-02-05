@@ -1,6 +1,6 @@
 package com.vet.api.v1.pet.controllers;
 
-import com.vet.services.owner.PetService;
+import com.vet.services.pet.PetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
