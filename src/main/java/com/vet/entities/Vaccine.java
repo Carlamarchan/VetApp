@@ -10,8 +10,16 @@ public class Vaccine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(unique = true)
     @NotBlank
     private String name;
+
+    public Vaccine() {
+    }
+
+    public Vaccine(String name) {
+        this.name = name;
+    }
 
     public long getId() {
         return id;

@@ -1,7 +1,9 @@
 package com.vet.services.vaccine;
 
+import com.vet.api.v1.vaccine.dtos.CreateVaccineDto;
 import com.vet.api.v1.vaccine.dtos.GetVaccineDto;
 import com.vet.entities.Vaccine;
+import com.vet.exception.DuplicatedVaccineNameException;
 import com.vet.exception.VaccineNotFoundException;
 import com.vet.mappers.VaccineMapper;
 import com.vet.repository.vaccine.VaccineRepository;
@@ -38,6 +40,28 @@ public class VaccineService {
         return new ResponseEntity<>(
                 VaccineMapper.mapEntityToGetVaccineDto(optionalVaccine.get()),
                 HttpStatus.OK
+        );
+    }
+
+    /**
+     * Creates a vaccine
+     *
+     * @param vaccineDto DTO that contains the information needed to create a vaccine
+     * @return A response with the information of the created vaccine
+     */
+    public ResponseEntity<GetVaccineDto> createVaccine(CreateVaccineDto vaccineDto) {
+        Optional<Vaccine> retrievedVaccine = vaccineRepository.findByName(vaccineDto.getName());
+        if (retrievedVaccine.isPresent()) {
+            throw new DuplicatedVaccineNameException();
+        }
+
+        Vaccine vaccineToSave = VaccineMapper.mapCreateVaccineDtoToEntity(vaccineDto);
+        Vaccine savedVaccine = vaccineRepository.save(vaccineToSave);
+        GetVaccineDto savedVaccineDto = VaccineMapper.mapEntityToGetVaccineDto(savedVaccine);
+
+        return new ResponseEntity<>(
+                savedVaccineDto,
+                HttpStatus.CREATED
         );
     }
 }

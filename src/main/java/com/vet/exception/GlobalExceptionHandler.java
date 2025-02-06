@@ -116,4 +116,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .body("The vaccine with the given ID does not exist");
     }
 
+    /**
+     * Handler method of DuplicatedVaccineNameException exception
+     *
+     * @param ex The exception to handle
+     * @return Bad request response with an error message
+     */
+    @ExceptionHandler(DuplicatedVaccineNameException.class)
+    public ResponseEntity<String> handleDuplicatedNameException(DuplicatedVaccineNameException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body("Duplicated name error occurred. Please provide a unique vaccine name.");
+    }
+
 }
