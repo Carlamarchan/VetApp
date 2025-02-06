@@ -103,4 +103,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .body("Duplicated Chip Number error occurred. Please provide a unique Chip Number.");
     }
 
+    /**
+     * Handler method of VaccineNotFoundException exception
+     *
+     * @param ex The exception to handle
+     * @return Not found response with an error message
+     */
+    @ExceptionHandler(VaccineNotFoundException.class)
+    public ResponseEntity<String> handleVaccineNotFound(VaccineNotFoundException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body("The vaccine with the given ID does not exist");
+    }
+
 }
