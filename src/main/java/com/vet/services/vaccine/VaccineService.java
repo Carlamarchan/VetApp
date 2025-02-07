@@ -2,6 +2,7 @@ package com.vet.services.vaccine;
 
 import com.vet.api.v1.vaccine.dtos.CreateVaccineDto;
 import com.vet.api.v1.vaccine.dtos.GetVaccineDto;
+import com.vet.api.v1.vaccine.dtos.UpdateVaccineDto;
 import com.vet.entities.Vaccine;
 import com.vet.exception.DuplicatedVaccineNameException;
 import com.vet.exception.VaccineNotFoundException;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -61,6 +63,33 @@ public class VaccineService {
 
         return new ResponseEntity<>(
                 savedVaccineDto,
+                HttpStatus.CREATED
+        );
+    }
+
+    /**
+     * Updates a vaccine
+     *
+     * @param id         Vaccine Id
+     * @param vaccineDto DTO that contains the information needed to update a vaccine
+     * @return A response with the information of the updated vaccine
+     */
+    public ResponseEntity<GetVaccineDto> updateVaccine(Long id, UpdateVaccineDto vaccineDto) {
+        Optional<Vaccine> retrievedVaccineById = vaccineRepository.findById(id);
+        if (retrievedVaccineById.isEmpty()) {
+            throw new VaccineNotFoundException();
+        }
+        Optional<Vaccine> retrievedVaccineByName = vaccineRepository.findByName(vaccineDto.getName());
+        if ((retrievedVaccineByName.isPresent()) && !Objects.equals(id, retrievedVaccineByName.get().getId())) {
+            throw new DuplicatedVaccineNameException();
+        }
+        Vaccine vaccineToUpdate = retrievedVaccineById.get();
+        vaccineToUpdate.setName(vaccineDto.getName());
+
+        Vaccine updatedVaccine = vaccineRepository.save(vaccineToUpdate);
+        GetVaccineDto updatedVaccineDto = VaccineMapper.mapEntityToGetVaccineDto(updatedVaccine);
+        return new ResponseEntity<>(
+                updatedVaccineDto,
                 HttpStatus.CREATED
         );
     }
