@@ -93,4 +93,18 @@ public class VaccineService {
                 HttpStatus.CREATED
         );
     }
+
+    /**
+     * Deletes a vaccine
+     *
+     * @param id Vaccine ID
+     */
+    public void deleteVaccine(Long id) {
+        Optional<Vaccine> retrievedVaccine = vaccineRepository.findById(id);
+        if (retrievedVaccine.isEmpty()) {
+            throw new VaccineNotFoundException();
+        }
+        Vaccine vaccineToDelete = retrievedVaccine.get();
+        vaccineRepository.delete(vaccineToDelete);
+    }
 }
