@@ -9,6 +9,8 @@ import com.vet.exception.VaccineNotFoundException;
 import com.vet.mappers.VaccineMapper;
 import com.vet.repository.vaccine.VaccineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -106,5 +108,16 @@ public class VaccineService {
         }
         Vaccine vaccineToDelete = retrievedVaccine.get();
         vaccineRepository.delete(vaccineToDelete);
+    }
+
+    /**
+     *Retrieves a page with vaccines
+     *
+     * @param page Vaccine Information
+     * @return A vaccines page
+     */
+    public Page<GetVaccineDto> getAllVaccines(Pageable page) {
+        Page<Vaccine> vaccinePage = vaccineRepository.findAll(page);
+        return vaccinePage.map(VaccineMapper::mapEntityToGetVaccineDto);
     }
 }
