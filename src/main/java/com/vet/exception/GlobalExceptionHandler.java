@@ -129,4 +129,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .body("Duplicated name error occurred. Please provide a unique vaccine name.");
     }
 
+    /**
+     * Handler method of VaccineRegisterNotFoundException exception
+     * @param ex The exception to handle
+     * @return Not found response with an error message
+     */
+    @ExceptionHandler(VaccineRegisterNotFoundException.class)
+    public ResponseEntity<String> handleVaccineRegisterNotFound(VaccineRegisterNotFoundException ex){
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body("The vaccine register with the given ID does not exist");
+    }
+
 }

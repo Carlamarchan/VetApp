@@ -1,4 +1,4 @@
-package com.vet.api.v1.pet.vaccine.dtos;
+package com.vet.api.v1.pet.vaccineRegister.dtos;
 
 import com.vet.api.v1.vaccine.dtos.GetVaccineDto;
 import io.swagger.v3.oas.annotations.media.Schema;

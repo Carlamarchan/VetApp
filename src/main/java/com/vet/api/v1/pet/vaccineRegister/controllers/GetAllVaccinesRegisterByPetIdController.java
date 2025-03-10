@@ -1,6 +1,6 @@
-package com.vet.api.v1.pet.vaccine.controllers;
+package com.vet.api.v1.pet.vaccineRegister.controllers;
 
-import com.vet.api.v1.pet.vaccine.dtos.GetVaccineRegisterDto;
+import com.vet.api.v1.pet.vaccineRegister.dtos.GetVaccineRegisterDto;
 import com.vet.services.vaccineRegister.VaccineRegisterService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static com.vet.api.constants.SwaggerConstants.PET_TAG;
 
 /**
- * Controller than retrieves all pet's vaccines
+ * Controller than retrieves all pet's vaccines register
  */
 @RestController
 public class GetAllVaccinesRegisterByPetIdController {
@@ -29,21 +29,21 @@ public class GetAllVaccinesRegisterByPetIdController {
     }
 
     /**
-     * Retrieves a page with pet's vaccines
+     * Retrieves a page with pet's vaccines register
      *
      * @param page Page information
      * @param id   Pet id
-     * @return vaccines page
+     * @return vaccines register page
      */
     @Operation(
-            summary = "Gets all pet's vaccines",
+            summary = "Gets all pet's vaccines register",
             tags = PET_TAG
     )
     @ApiResponses(
             value = {
                     @ApiResponse(
                             responseCode = "200",
-                            description = "List of paginated vaccines",
+                            description = "List of paginated vaccines register",
                             useReturnTypeSchema = true
                     ),
                     @ApiResponse(
@@ -53,7 +53,7 @@ public class GetAllVaccinesRegisterByPetIdController {
                     )
             }
     )
-    @GetMapping(path = "api/v1/pets/{id}/vaccines")
+    @GetMapping(path = "api/v1/pets/{id}/vaccines-register")
     public Page<GetVaccineRegisterDto> getAllVaccinesRegisterByPetId(@PageableDefault(size = 5) Pageable page, @PathVariable Long id) {
         return this.vaccineRegisterService.getAllVaccinesRegisterByPetId(page, id);
     }

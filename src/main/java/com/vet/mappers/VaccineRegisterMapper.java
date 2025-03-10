@@ -1,6 +1,6 @@
 package com.vet.mappers;
 
-import com.vet.api.v1.pet.vaccine.dtos.GetVaccineRegisterDto;
+import com.vet.api.v1.pet.vaccineRegister.dtos.GetVaccineRegisterDto;
 import com.vet.entities.VaccineRegister;
 
 public class VaccineRegisterMapper {
