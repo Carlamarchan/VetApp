@@ -1,7 +1,7 @@
 package com.vet.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table
@@ -15,8 +15,14 @@ public class VaccineRegister {
     @ManyToOne
     @JoinColumn(name = "vaccine_id")
     private Vaccine vaccine;
-    @NotBlank
+    @NotNull
     private Integer vaccineYear;
+
+    public VaccineRegister(Pet pet, Vaccine vaccine, Integer vaccineYear) {
+        this.pet = pet;
+        this.vaccine = vaccine;
+        this.vaccineYear = vaccineYear;
+    }
 
     public Long getId() {
         return id;

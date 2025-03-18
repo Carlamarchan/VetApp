@@ -1,28 +1,21 @@
-package com.vet.api.v1.owner.dtos;
+package com.vet.api.v1.vaccine.dtos;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 
-/**
- * DTO that represents the owner's identifier
- */
-public class OwnerIdDto {
+public class VaccineIdDto {
     @Schema(example = "1")
-    @NotNull(message = "Owner ID is required.")
+    @NotNull(message = "Vaccine ID is required.")
     Long id;
 
-    public OwnerIdDto() {
+    public VaccineIdDto() {
     }
 
-    public OwnerIdDto(Long id) {
+    public VaccineIdDto(Long id) {
         this.id = id;
     }
 
     public Long getId() {
         return id;
     }
-
 }
-
-
-
